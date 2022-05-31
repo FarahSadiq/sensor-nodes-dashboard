@@ -1,0 +1,653 @@
+<!--<div class="row">-->
+<!--  <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--    <div class="card card-stats">-->
+<!--      <div class="card-body ">-->
+<!--        <div class="row">-->
+<!--          <div class="col-5 col-md-4">-->
+<!--            <div class="icon-big text-center icon-warning">-->
+<!--              <i class="nc-icon nc-globe text-warning"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-7 col-md-8">-->
+<!--            <div class="numbers">-->
+<!--              <p class="card-category">Capacity</p>-->
+<!--              <p class="card-title">150GB-->
+<!--                <p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="card-footer ">-->
+<!--        <hr>-->
+<!--        <div class="stats">-->
+<!--          <i class="fa fa-refresh"></i> Update Now-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--    <div class="card card-stats">-->
+<!--      <div class="card-body ">-->
+<!--        <div class="row">-->
+<!--          <div class="col-5 col-md-4">-->
+<!--            <div class="icon-big text-center icon-warning">-->
+<!--              <i class="nc-icon nc-money-coins text-success"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-7 col-md-8">-->
+<!--            <div class="numbers">-->
+<!--              <p class="card-category">Revenue</p>-->
+<!--              <p class="card-title">$ 1,345-->
+<!--                <p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="card-footer ">-->
+<!--        <hr>-->
+<!--        <div class="stats">-->
+<!--          <i class="fa fa-calendar-o"></i> Last day-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--    <div class="card card-stats">-->
+<!--      <div class="card-body ">-->
+<!--        <div class="row">-->
+<!--          <div class="col-5 col-md-4">-->
+<!--            <div class="icon-big text-center icon-warning">-->
+<!--              <i class="nc-icon nc-vector text-danger"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-7 col-md-8">-->
+<!--            <div class="numbers">-->
+<!--              <p class="card-category">Errors</p>-->
+<!--              <p class="card-title">23-->
+<!--                <p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="card-footer ">-->
+<!--        <hr>-->
+<!--        <div class="stats">-->
+<!--          <i class="fa fa-clock-o"></i> In the last hour-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--    <div class="card card-stats">-->
+<!--      <div class="card-body ">-->
+<!--        <div class="row">-->
+<!--          <div class="col-5 col-md-4">-->
+<!--            <div class="icon-big text-center icon-warning">-->
+<!--              <i class="nc-icon nc-favourite-28 text-primary"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-7 col-md-8">-->
+<!--            <div class="numbers">-->
+<!--              <p class="card-category">Followers</p>-->
+<!--              <p class="card-title">+45K-->
+<!--                <p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="card-footer ">-->
+<!--        <hr>-->
+<!--        <div class="stats">-->
+<!--          <i class="fa fa-refresh"></i> Update now-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="card" >
+  <ngx-spinner></ngx-spinner>
+  <div *ngFor="let alert of alertMessage;index as i">
+    <div class="alert alert-danger alert-dismissible fade show" id="alert{{i}}" *ngIf="alert.co_level_alert == true">
+      <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close" (click)="close('alert'+i)">
+        <i class="nc-icon nc-simple-remove"></i>
+      </button>
+      <span>
+                   <b> CO level detected at node {{alert.device_name}} - Value: {{alert.co_level}} Time: {{alert.time}}</b></span>
+    </div>
+
+    <div class="alert alert-danger alert-dismissible fade show" id="alert2{{i}}" *ngIf="alert.audio_alert == true">
+      <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close" (click)="close('alert2'+i)">
+        <i class="nc-icon nc-simple-remove"></i>
+      </button>
+      <span>
+                    <b> Audio signal detected at node {{alert.device_name}} - Value: {{alert.audio_level}} Time: {{alert.time}}</b></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-9 col-sm-9 col-md-9">
+      <h5 class="card-title" id = "topp" >Live Readings of Node {{this.nodeId}}</h5>
+    </div>
+    <div class="col col-3 col-sm-3 col-md-3" style="text-align: right;">
+
+        <label>Low <i class="fas fa-square" style="color:#81c784"></i>&nbsp;</label>
+        <label>Medium <i class="fas fa-square" style="color:#fbc02d"></i>&nbsp;</label>
+        <label>High <i class="fas fa-square" style="color:#ef5350"></i></label>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col col-sm-12 col-md-3 col-lg-3 col-12 ">
+      <div class="card perfect-scrollbar-on ps-scrollbar-y">
+        <div class="card-body" id="tempCurr" >
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center ">
+                <i class="fa fa-thermometer" style="font-size:350%;color:#ffa726"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Temperature <small>(°C)</small></p>
+                <p class="card-title" *ngIf="tempShow">{{this.tempData.last_value}}
+                <p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr style="margin: 0">
+        <div  class="card-body" >
+          <p *ngIf="tempShow">Last 24 hours:<br>
+            Average: {{this.tempData.average.toFixed(2)}}<br>
+            Minimim: {{this.tempData.min_value}}<br>
+            Maximum: {{this.tempData.max_value}}</p>
+
+        </div>
+      </div>
+    </div>
+    <div class="col col-sm-12 col-md-3 col-lg-3 col-12 ">
+      <div class="card perfect-scrollbar-on ps-scrollbar-y" >
+        <div class="card-body" >
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center ">
+                <img style="height: 50px; width: 50px" src="assets/img/hum.png">
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Humidity <small>(%)</small></p>
+                <p class="card-title" *ngIf="humShow">{{this.humidityData.last_val}}
+                <p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr style="margin: 0">
+        <div id="tempHis" class="card-body">
+          <p *ngIf="humShow">Last 24 hours:<br>
+            Average: {{this.humidityData.average.toFixed(2)}}<br>
+            Minimum: {{this.humidityData.min_val}}<br>
+            Maximum: {{this.humidityData.max_val}}
+          </p>
+          <!--            <i class="fa fa-clock-o"></i><small class="text-muted">  2 mins ago</small>-->
+        </div>
+
+
+      </div>
+    </div>
+    <div class="col col-sm-12 col-md-3 col-lg-3 col-12 ">
+      <div class="card perfect-scrollbar-on ps-scrollbar-y" >
+        <div class="card-body" >
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center ">
+                <img style="height: 50px; width: 50px" src="assets/img/moisturizing.png">
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Soil Moisture <small>(%)</small></p>
+                <p class="card-title" *ngIf="moistureShow">{{this.soilHumidityData.last_value}}
+                <p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr style="margin: 0">
+        <div class="card-body">
+          <p *ngIf="moistureShow">Last 24 hours:<br>
+            Average: {{this.soilHumidityData.average.toFixed(2)}}<br>
+            Minimum: {{this.soilHumidityData.min_value}}<br>
+            Maximum: {{this.soilHumidityData.max_value}}
+          </p>
+        </div>
+
+
+      </div>
+    </div>
+    <div class="col col-sm-12 col-md-3 col-lg-3 col-12 ">
+      <div class="card" >
+        <div class="card-body" id="AQI"  >
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center ">
+                <i class="fa fa-wind" style="font-size:50px;color:#673ab7"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Air Quality <small>(AQI)</small></p>
+                <p class="card-title" *ngIf="aqShow">{{this.airQualityData.last_val}}
+                <p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr style="margin: 0">
+        <div class="card-body">
+          <p *ngIf="aqShow">Last 24 hours:<br>
+            Average: {{this.airQualityData.average.toFixed(2)}}<br>
+            Minimum: {{this.airQualityData.min_val}}<br>
+            Maximum: {{this.airQualityData.max_val}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+
+    <div class="col col-sm-12 col-md-3 col-lg-3 col-12 ">
+      <div class="card " >
+        <div class="card-body" id="ir_light" >
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center ">
+                <img style="height: 50px; width: 50px" src="assets/img/ir.jpg">
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">IR Light <br> <small>(Lux)</small></p>
+                <p class="card-title" *ngIf="lightShow">{{this.lightData.ir_last_val}}
+                <p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr style="margin: 0">
+        <div class="card-body">
+          <p  *ngIf="lightShow">Last 24 hours:<br>
+            Average: {{this.lightData.ir_average.toFixed(2)}}<br>
+            Minimum: {{this.lightData.ir_min_val}}<br>
+            Maximum: {{this.lightData.ir_max_val}}
+          </p>
+        </div>
+
+
+      </div>
+    </div>
+    <div class="col col-sm-12 col-md-3 col-lg-3 col-12 ">
+      <div class="card" >
+        <div class="card-body" id="visLight" >
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center ">
+                <i class="fa fa-eye" style="font-size:50px;color:#ff7043"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Visible Light <small>(Lux)</small></p>
+                <p class="card-title"  *ngIf="lightShow">{{this.lightData.vis_last_val}}
+                <p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr style="margin: 0">
+        <div class="card-body">
+          <p  *ngIf="lightShow">Last 24 hours:<br>
+            Average: {{this.lightData.vis_average.toFixed(2)}}<br>
+            Minimum: {{this.lightData.vis_min_val}}<br>
+            Maximum: {{this.lightData.vis_max_val}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col col-sm-12 col-md-3 col-lg-3 col-12 ">
+      <div class="card " >
+        <div class="card-body" id="uv_light"  >
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center ">
+                <img style="height: 50px; width: 50px" src="assets/img/uv.png">
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">UV Light <small>(UV Index)</small></p>
+                <p class="card-title"  *ngIf="lightShow">{{this.lightData.uv_last_val}}
+                <p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr style="margin: 0">
+        <div class="card-body">
+          <p  *ngIf="lightShow">Last 24 hours:<br>
+            Average: {{this.lightData.uv_average.toFixed(2)}}<br>
+            Minimum: {{this.lightData.uv_min_val}}<br>
+            Maximum: {{this.lightData.uv_max_val}}<br>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col col-sm-12 col-md-3 col-lg-3 col-12 ">
+      <div class="card perfect-scrollbar-on ps-scrollbar-y " (click)="getLoc()" >
+        <div class="card-body" >
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center ">
+                <img style="height: 50px; width: 50px" src="assets/img/map.png">
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Location</p>
+              </div>
+              <p  *ngIf="locShow"><a  (click)="getLoc()" style="color: #1F77D0" >{{latitude}}<br>{{longitude}}</a></p>
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div class="card-body">
+          <p *ngIf="latitude !== 'N/A'"><a href="#">Click here</a> to view the location on Google Map.
+            <br><br>
+          </p>
+          <div></div>
+        </div>
+      </div>
+
+      <!--      <div class="card" style="max-height: 150px; overflow-y: scroll;" >-->
+      <!--        <div class="card-body"  >-->
+      <!--          <p style="font-size: 100%; alignment: left;color: red " >Alerts</p>-->
+      <!--          <div class="row"  *ngFor="let msg of alertsHistory;index as i">-->
+
+      <!--            <div class="col-md-12 col-12" *ngIf="msg.audio_alert">-->
+      <!--              Noise Detected  At {{msg.time.substr(0, 20)}}<br>-->
+      <!--              <span class="bg-danger">-->
+      <!--                  Value: {{msg.audio_level}}-->
+      <!--                </span>-->
+      <!--              <hr>-->
+      <!--            </div>-->
+
+      <!--            <div class="col-md-12 col-12" *ngIf="msg.co_level_alert">-->
+      <!--              High CO level Detected At {{msg.time.substr(0, 20)}}<br>-->
+      <!--              <span class="bg-danger">-->
+      <!--                  Value: {{msg.co_level}}-->
+      <!--                </span>-->
+      <!--              <hr>-->
+      <!--            </div>-->
+
+      <!--            &lt;!&ndash;                <div class="col-md-3 col-3 text-right">&ndash;&gt;-->
+      <!--            &lt;!&ndash;                  <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>&ndash;&gt;-->
+      <!--            &lt;!&ndash;                </div>&ndash;&gt;-->
+      <!--          </div>-->
+      <!--          <hr>-->
+      <!--      </div>-->
+      <!--    </div>-->
+
+    </div>
+  </div>
+  <div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th align = 'center'>Alerts</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th>No</th>
+        <th>Time Stamp</th>
+        <th>Type</th>
+        <th>Value</th>
+      </tr>
+      <tr *ngFor="let msg of history;index as i">
+        <td>{{i+1}}</td>
+        <td>{{msg.time.substr(0, 20)}}</td>
+        <td *ngIf="msg.co_level_alert">CO level alert</td>
+        <td  *ngIf="msg.co_level_alert">{{msg.co_level}}</td>
+        <td  *ngIf="msg.audio_alert">Audio signal alert</td>
+        <td  *ngIf="msg.audio_alert">{{msg.audio_level}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+
+
+  <a id="click" type="button" href="#avg"></a>
+  <a id="top" type="button" href="#topp"></a>
+
+  <div class="card" >
+    <!--  <div class="row">-->
+
+    <!--    <div class="col col-sm-12 col-md-2 col-lg-2 col-12 ">-->
+
+    <!--      <div class="card"   id = "temperature"  (click)="flip($event,0)" >-->
+    <!--        <div class="flip-card-inner">-->
+    <!--          <div class="flip-card-front">-->
+    <!--            <div class="card-body"  *ngIf="!this.toggle[0]">-->
+    <!--              <br> <br> <br> <br>-->
+    <!--              <p style="font-size: 140%; alignment: left; " >Temperature </p>-->
+    <!--              <p style="font-size: 220%; alignment: right; color: #fbc658"> {{this.avgTemp.toFixed(2)}} <span style="font-size: 70%"> °C</span> </p>-->
+    <!--              <br> <br> <br> <br> <br><br>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--          <div class="flip-card-back" [ngStyle]="{'height':!this.toggle[0] ? '0px' : '100%'}">-->
+    <!--            <div class="card-body ">-->
+    <!--              <canvas id=chartTemp  height="450" ></canvas>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+    <!--    <div class="col col-sm-12 col-md-2 col-lg-2 col-12"   >-->
+    <!--      <div class="card" id = "elevation"  (click)="flip($event,1)" >-->
+    <!--        <div class="flip-card-inner ">-->
+    <!--          <div class="flip-card-front" >-->
+
+    <!--            <div class="card-body"  *ngIf="!this.toggle[1]">-->
+    <!--              <br> <br> <br> <br>-->
+    <!--              <p class="card-header" style="font-size: 140%">Elevation </p>-->
+    <!--              <p class="card-header" style="font-size: 220%; color: #51CACF;"> {{this.avgElevation}}  </p>-->
+    <!--              <br> <br> <br> <br> <br><br>-->
+    <!--            </div>-->
+
+    <!--          </div>-->
+    <!--          <div class="flip-card-back" [ngStyle]="{'height':!this.toggle[1] ? '0px' : '100%'}">-->
+    <!--            <div class="card-body " >-->
+    <!--              <canvas   id=chartElevation  height="450" ></canvas>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+    <!--    <div class="col col-sm-12 col-md-2 col-lg-2 col-12"  >-->
+
+    <!--      <div class="card "  id = "airQuality"  (click)="flip($event,2)"  >-->
+    <!--        <div class="flip-card-inner">-->
+    <!--          <div class="flip-card-front" >-->
+    <!--            <div class="card-body" *ngIf="!this.toggle[2]">-->
+    <!--              <br> <br> <br> <br>-->
+    <!--              <p class="card-header" style="font-size: 140%">Air Quality </p>-->
+    <!--              <p class="card-header" style="font-size: 220%; color: #ff8a65;"> {{this.avgAirQuality.toFixed(2)}} </p>-->
+    <!--              <br> <br> <br> <br> <br><br>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--          <div class="flip-card-back"  [ngStyle]="{'height': !this.toggle[2] ? '0px' : '100%'}">-->
+    <!--            <div class="card-body ">-->
+    <!--              <canvas id=chartAirQuality  height="450" ></canvas>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <div class="col-sm-12 col-md-2 col-12">-->
+    <!--      <div class="card " id = "smoke"  (click)="flip($event,3)">-->
+    <!--        <div class="flip-card-inner">-->
+    <!--          <div class="flip-card-front">-->
+
+    <!--            <div class="card-header"  *ngIf="!this.toggle[3]" >-->
+    <!--              <br> <br> <br> <br>-->
+    <!--              <p class="card-header" style="font-size: 140%;color: #7e57c2;">Smoke </p>-->
+    <!--              <p class="card-header" style="font-size: 220%;color: #7e57c2;"> {{this.avgSmoke.toFixed(2)}}  </p>-->
+    <!--              <br> <br> <br> <br> <br><br>-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--          <div class="flip-card-back"  [ngStyle]="{'height':!this.toggle[3] ? '0px' : '100%'}">-->
+
+    <!--            <div class="card-body " >-->
+    <!--              <canvas id=chartSmoke  height="450" > </canvas>-->
+    <!--            </div>-->
+    <!--            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>-->
+    <!--          </div>-->
+
+    <!--        </div>-->
+
+    <!--      </div>-->
+    <!--    </div>-->
+
+    <!--    <div class="col col-sm-12 col-md-4 col-12"  >-->
+
+    <!--      <div class="card " style="max-height: 300px" >-->
+    <!--        <div class="card-header"  >-->
+    <!--          <p class="card-header" style="font-size: 140%;color: #d32f2f;">Alerts </p></div>-->
+    <!--        <div class="card-body  " style="overflow-y: scroll; " >-->
+
+    <!--          <ul>-->
+    <!--            <li class="list-unstyled team-members">-->
+    <!--            <div class="row">-->
+    <!--              <i class="nc-icon nc-sound-wave" style="font-size: 200%"></i>-->
+    <!--              <div class="col-md-2 col-2">-->
+    <!--                <div>-->
+
+    <!--                </div>-->
+    <!--              </div>-->
+    <!--              <div class="col-md-7 col-7">-->
+    <!--                Noise Detected-->
+    <!--                <br />-->
+    <!--                <span class="text-muted">-->
+    <!--                  <small>Value: 11</small>-->
+    <!--                    At 16/3/2022 14:00:00-->
+    <!--                </span>-->
+    <!--              </div>-->
+    <!--              &lt;!&ndash;                <div class="col-md-3 col-3 text-right">&ndash;&gt;-->
+    <!--              &lt;!&ndash;                  <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>&ndash;&gt;-->
+    <!--              &lt;!&ndash;                </div>&ndash;&gt;-->
+    <!--            </div>-->
+    <!--          </li>-->
+    <!--            <li>-->
+    <!--              <div class="row">-->
+    <!--                <i class="fa-solid fa-smog" style="font-size: 200%"></i>-->
+    <!--                <div class="col-md-2 col-2">-->
+    <!--                  <div class="avatar">-->
+
+    <!--                  </div>-->
+    <!--                </div>-->
+    <!--                <div class="col-md-7 col-7">-->
+    <!--                  Smoke Detected-->
+    <!--                  <br />-->
+    <!--                  <span class="text-muted">-->
+    <!--                  <small>Value > 0</small>-->
+    <!--                    At 15/3/2022 10:00:00-->
+    <!--                </span>-->
+    <!--                </div>-->
+    <!--                &lt;!&ndash;                <div class="col-md-3 col-3 text-right">&ndash;&gt;-->
+    <!--                &lt;!&ndash;                  <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>&ndash;&gt;-->
+    <!--                &lt;!&ndash;                </div>&ndash;&gt;-->
+    <!--              </div>-->
+    <!--            </li>-->
+    <!--          </ul>-->
+
+
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
+
+    <!--  <div class="row">-->
+
+    <!--    <div class="col col-sm-12 col-md-6 col-12"  >-->
+
+    <!--      <div class="card" (click)="getLoc()" >-->
+    <!--        <br>-->
+    <!--        <h5 class="card-title">&nbsp;Location Co-ordinates</h5>-->
+    <!--        <div class="card-body " >-->
+    <!--          <span>-->
+    <!--               <a  (click)="getLoc()" style="font-size: 180%">{{latitude}}<br>{{longitude}}</a>-->
+    <!--                </span>-->
+    <!--          <br><br><br><br><br><br><br>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--    <div class="col-sm-12 col-md-6 col-12">-->
+    <!--      <div class="card  maph-100"  id = "temperature"   >-->
+    <!--        <div class="card-header " >-->
+    <!--          <h5 class="card-title">Temperature (°C)</h5>-->
+    <!--        </div>-->
+    <!--        <div class="card-body ">-->
+    <!--          <canvas  id=chartTemp  style="width:80%;height:70%;"></canvas>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--    <div class="row">-->
+    <!--      <div class="col-sm-12 col-md-6 col-12">-->
+    <!--        <div class="card maph-100">-->
+    <!--        <div class="card-header " >-->
+    <!--          <h5 class="card-title">Soil Moisture(%)</h5>-->
+    <!--        </div>-->
+    <!--        <div class="card-body ">-->
+    <!--          <canvas id=chartSoilHumidity  style="width:80%;height:70%;"  ></canvas>-->
+    <!--        </div>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--      <div class="col-sm-12 col-md-6 col-12">-->
+    <!--        <div class="card maph-100">-->
+    <!--        <div class="card-header " >-->
+    <!--          <h5 class="card-title">Humidity(%)</h5>-->
+    <!--        </div>-->
+    <!--        <div class="card-body ">-->
+    <!--          <canvas id=chartHumidity style="width:80%;height:80%;" ></canvas>-->
+    <!--        </div>-->
+    <!--        </div>-->
+
+    <!--      </div>-->
+    <!--    </div>-->
+  </div>
+  <!--    <div class="row">-->
+  <!--      <div class="col-12 col-md-12">-->
+  <!--  </div>-->
+  <!--    </div>-->
+  <!--  <table>-->
+  <!--    <h4>Alerts History</h4>-->
+  <!--    <tr [bgColor]="'00acc1'" >-->
+  <!--      <th style="border: 1px solid">Section</th>-->
+  <!--      <th style="border: 1px solid">Theory</th>-->
+  <!--      <th style="border: 1px solid">Practical</th>-->
+  <!--    </tr>-->
+  <!--  </table>-->
+</div>
+
+
+<!--Averages Graphs-->
+
+

@@ -1,0 +1,30 @@
+
+<div class="sidebar-wrapper">
+  <div class="logo">
+    <a  class="simple-text logo-normal">
+      <div class="logo-image-small">
+        <img src="assets/img/logopng.png">
+      </div>
+    </a>
+    <a class="simple-text logo-mini">
+
+    </a>
+  </div>
+    <ul class="nav" >
+        <li data-toggle="collapse"  data-target="#collapseOne" aria-expanded="false"  routerLinkActive="active" aria-controls="collapseOnecollapseOne" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+            <a [routerLink]="">
+                <i class="nc-icon {{menuItem.icon}}"></i>
+                <p>{{menuItem.title}}</p>
+            </a>
+          <ul  *ngIf="menuItem.children" style="padding-left: 10%" id = 'collapseOne'>
+            <li  class="nav collapse" *ngFor="let child of menuItem.children" routerLinkActive="active" class="{{menuItem.class}}">
+              <a  [routerLink]="[child.path]">
+                <i class="nc-icon {{menuItem.icon}}"></i>
+                <p>{{child.title}}</p>
+              </a>
+            </li>
+
+          </ul>
+        </li>
+    </ul>
+</div>
