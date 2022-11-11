@@ -18,6 +18,7 @@ export interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
+  { path: '/alerts',     title: 'Alerts History',         icon: 'nc-chart-bar-32',       class: '', type : 'link' },
   { path: '/dashboard/UK-GLA-001',     title: 'Nodes',         icon: 'nc-atom',     class: '', type : 'sub',
     'children': [
       { title: 'UK-GLA-001',     path: '/dashboard/UK-GLA-001',     class: '', type : 'link'
@@ -45,7 +46,7 @@ export const ROUTES: RouteInfo[] = [
       { title: 'UK-GLA-012',     path: '/dashboard/UK-GLA-012',     class: '', type : 'link'
       }]
   },
-  //{ path: '/dashboard/3',     title: 'Average Values',         icon: 'nc-chart-bar-32',       class: '', type : 'link' },
+
   // { path: '/icons',         title: 'Icons',             icon:'nc-diamond',    class: '' ,  type: "link",},
   // { path: '/maps',          title: 'Maps',              icon:'nc-pin-3',      class: '' ,  type: "link", },
   // { path: '/notifications', title: 'Notifications',     icon:'nc-bell-55',    class: '' ,  type: "link",},

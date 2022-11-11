@@ -4,6 +4,7 @@ import { DashboardComponent } from '../../pages/dashboard/dashboard.component';
 import {MapsComponent} from '../../pages/maps/maps.component';
 import {TableComponent} from '../../pages/table/table.component';
 import {UserComponent} from '../../pages/user/user.component';
+import {AlertHistoryComponent} from '../../pages/alertHistory/alertHistory.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -16,7 +17,7 @@ export const AdminLayoutRoutes: Routes = [
       }]
   },
     //     },
-     { path: 'maps',           component: MapsComponent },
+     { path: 'alerts',           component: AlertHistoryComponent },
     // { path: 'table',          component: TableComponent },
     // { path: 'typography',     component: TypographyComponent },
     // { path: 'icons',          component: IconsComponent },

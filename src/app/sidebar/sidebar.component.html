@@ -12,7 +12,7 @@
   </div>
     <ul class="nav" >
         <li data-toggle="collapse"  data-target="#collapseOne" aria-expanded="false"  routerLinkActive="active" aria-controls="collapseOnecollapseOne" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
-            <a [routerLink]="">
+            <a [routerLink]="menuItem.path">
                 <i class="nc-icon {{menuItem.icon}}"></i>
                 <p>{{menuItem.title}}</p>
             </a>

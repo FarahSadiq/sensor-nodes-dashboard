@@ -74,4 +74,7 @@ export class ApiCalls {
   public getHistoricalAlerts(nodeId): Observable<any> {
     return this.http.get<any>(endpoint + 'alertsdata/' + nodeId   , httpOptions).pipe();
   }
+  public getLastWeekAlerts(): Observable<any> {
+    return this.http.get<any>(endpoint + 'alertsforlastsevendays'  , httpOptions).pipe();
+  }
 }

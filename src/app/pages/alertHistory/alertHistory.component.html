@@ -1,0 +1,143 @@
+<!--<div class="row">-->
+<!--  <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--    <div class="card card-stats">-->
+<!--      <div class="card-body ">-->
+<!--        <div class="row">-->
+<!--          <div class="col-5 col-md-4">-->
+<!--            <div class="icon-big text-center icon-warning">-->
+<!--              <i class="nc-icon nc-globe text-warning"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-7 col-md-8">-->
+<!--            <div class="numbers">-->
+<!--              <p class="card-category">Capacity</p>-->
+<!--              <p class="card-title">150GB-->
+<!--                <p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="card-footer ">-->
+<!--        <hr>-->
+<!--        <div class="stats">-->
+<!--          <i class="fa fa-refresh"></i> Update Now-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--    <div class="card card-stats">-->
+<!--      <div class="card-body ">-->
+<!--        <div class="row">-->
+<!--          <div class="col-5 col-md-4">-->
+<!--            <div class="icon-big text-center icon-warning">-->
+<!--              <i class="nc-icon nc-money-coins text-success"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-7 col-md-8">-->
+<!--            <div class="numbers">-->
+<!--              <p class="card-category">Revenue</p>-->
+<!--              <p class="card-title">$ 1,345-->
+<!--                <p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="card-footer ">-->
+<!--        <hr>-->
+<!--        <div class="stats">-->
+<!--          <i class="fa fa-calendar-o"></i> Last day-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--    <div class="card card-stats">-->
+<!--      <div class="card-body ">-->
+<!--        <div class="row">-->
+<!--          <div class="col-5 col-md-4">-->
+<!--            <div class="icon-big text-center icon-warning">-->
+<!--              <i class="nc-icon nc-vector text-danger"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-7 col-md-8">-->
+<!--            <div class="numbers">-->
+<!--              <p class="card-category">Errors</p>-->
+<!--              <p class="card-title">23-->
+<!--                <p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="card-footer ">-->
+<!--        <hr>-->
+<!--        <div class="stats">-->
+<!--          <i class="fa fa-clock-o"></i> In the last hour-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div class="col-lg-3 col-md-6 col-sm-6">-->
+<!--    <div class="card card-stats">-->
+<!--      <div class="card-body ">-->
+<!--        <div class="row">-->
+<!--          <div class="col-5 col-md-4">-->
+<!--            <div class="icon-big text-center icon-warning">-->
+<!--              <i class="nc-icon nc-favourite-28 text-primary"></i>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="col-7 col-md-8">-->
+<!--            <div class="numbers">-->
+<!--              <p class="card-category">Followers</p>-->
+<!--              <p class="card-title">+45K-->
+<!--                <p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="card-footer ">-->
+<!--        <hr>-->
+<!--        <div class="stats">-->
+<!--          <i class="fa fa-refresh"></i> Update now-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<a id="click" type="button" href="#avg"></a>
+<a id="top" type="button" href="#topp"></a>
+<h5 class="card-title" id = "topp">Alerts History</h5>
+<div class="card" >
+  <div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th align = 'center'>Alerts</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th>No</th>
+        <th>Node ID</th>
+        <th>Time Stamp</th>
+        <th>Type</th>
+        <th>Value</th>
+      </tr>
+      <tr *ngFor="let msg of history;index as i">
+        <td>{{i+1}}</td>
+        <td>{{msg.device_name}}</td>
+        <td>{{msg.time.substr(0, 20)}}</td>
+        <td *ngIf="msg.co_level_alert">CO level alert</td>
+        <td  *ngIf="msg.co_level_alert">{{msg.co_level}}</td>
+        <td  *ngIf="msg.audio_alert">Audio signal alert</td>
+        <td  *ngIf="msg.audio_alert">{{msg.audio_level}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
